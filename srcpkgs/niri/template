@@ -1,0 +1,20 @@
+# Template file for 'niri'
+pkgname=niri
+version=0.1.9
+revision=1
+build_style=cargo
+configure_args="--no-default-features --features xdp-gnome-screencast"
+hostmakedepends="pkg-config"
+makedepends="eudev-libudev-devel libxkbcommon-devel libinput-devel libdisplay-info-devel pipewire-devel pango-devel libseat-devel clang libgbm-devel"
+depends="eudev-libudev libxkbcommon libinput libpipewire pango libseat libgbm libdisplay-info"
+short_desc="Scrollable-tiling Wayland compositor"
+maintainer="joetroll <joetroll@proton.me>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/YaLTeR/niri"
+changelog="https://github.com/YaLTeR/niri/releases"
+distfiles="https://github.com/YaLTeR/niri/archive/refs/tags/v${version}.tar.gz"
+checksum=70427efcde50a9d262c341befbd4df4e24557afd8311753bf912a4be1bf243a7
+
+if [ "$XBPS_TARGET_LIBC" = "musl" ]; then
+    configure_args="RUSTFLAGS='-C target-feature=+crt-static' $configure_args"
+fi
